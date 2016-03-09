@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sannewinther.mandatoryassignment.RoomActivity"
+    style="@style/layout">
+
+    <ImageView
+        android:src="@drawable/logo"
+        style="@style/logo" />
+
+    <TextView
+        android:text="@string/Login"
+        style="@style/headline" />
+
+    <EditText
+        android:id="@+id/username"
+        android:hint="@string/username"
+        style="@style/editText" />
+    <EditText
+        android:id="@+id/password"
+        android:password="true"
+        android:hint="@string/password"
+        style="@style/editText" />
+    <Button
+        android:id="@+id/login"
+        android:onClick="login"
+        android:text="@string/login"
+        style="@style/button"/>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:src="@drawable/diamond"
+        style="@style/diamond" />
+</LinearLayout>

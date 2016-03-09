@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sannewinther.mandatoryassignment.ReservationActivity"
+    style="@style/layout">
+
+    <ImageView
+        android:src="@drawable/logo"
+        style="@style/logo" />
+    <TextView
+        android:text="@string/roomDetails"
+        style="@style/headline" />
+
+    <TextView
+        android:id="@+id/roomName"
+        style="@style/underHeadline" />
+    <TextView
+        android:id="@+id/description"
+        style="@style/underHeadline" />
+    <TextView
+        android:id="@+id/capacity"
+        style="@style/underHeadline" />
+    <TextView
+        android:id="@+id/remarks"
+        style="@style/underHeadline" />
+
+    <TextView
+        android:text="@string/currentReservation"
+        style="@style/headline" />
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/list" />
+
+    <Button
+        android:onClick="back"
+        android:text="@string/backButton"
+        style="@style/button" />
+</LinearLayout>

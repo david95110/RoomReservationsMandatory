@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sannewinther.mandatoryassignment.ReservationDetailActivity"
+    style="@style/layout">
+
+    <ImageView
+        android:src="@drawable/logo"
+        style="@style/logo" />
+    <TextView
+        android:text="@string/reservaionDetails"
+        style="@style/headline" />
+
+    <TextView
+        android:id="@+id/purpose"
+        style="@style/underHeadline" />
+    <TextView
+        android:id="@+id/fromTime"
+        style="@style/underHeadline" />
+    <TextView
+        android:id="@+id/toTime"
+        style="@style/underHeadline" />
+    <Button
+        android:onClick="deleteReservation"
+        android:text="@string/deleteReservation"
+        style="@style/deleteButton" />
+    <Button
+        android:onClick="back"
+        android:text="@string/backButton"
+        style="@style/button" />
+</LinearLayout>

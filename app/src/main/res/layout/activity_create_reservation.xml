@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sannewinther.mandatoryassignment.CreateReservationActivity"
+    style="@style/layout">
+
+    <ImageView
+        android:src="@drawable/logo"
+        style="@style/logo" />
+
+    <TextView
+        android:text="@string/createReservation"
+        style="@style/headline" />
+
+    <EditText
+        android:id="@+id/createPurpose"
+        android:hint="@string/purpose"
+        style="@style/editText" />
+    <EditText
+        android:id="@+id/createFrom"
+        android:hint="@string/from"
+        style="@style/editText" />
+    <EditText
+        android:id="@+id/createTo"
+        android:hint="@string/to"
+        style="@style/editText" />
+    <Spinner
+        android:id="@+id/createRoomId"
+        android:hint="@string/roomId"
+        style="@style/editText" />
+
+    <Button
+        android:id="@+id/create"
+        android:onClick="create"
+        android:text="@string/create"
+        style="@style/button"/>
+    <Button
+        android:onClick="back"
+        android:text="@string/backButton"
+        style="@style/button" />
+</LinearLayout>
