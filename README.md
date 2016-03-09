@@ -1,1 +1,1 @@
-# AndroidRoomReservations
+# Android Room Reservations - Mandatory Assignment
