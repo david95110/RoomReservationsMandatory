@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MandatoryAssignment</string>
+    <string name="app_name">Android Room Reservations</string>
     <string name="buildingDetails">Building details</string>
     <string name="room">Select room</string>
     <string name="city">Select city</string>

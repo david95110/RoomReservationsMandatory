@@ -1,14 +1,14 @@
-package com.example.sannewinther.mandatoryassignment;
+package com.example.danielwinther.androidroomreservations;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,32 +22,37 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyReservationActivity extends Activity {
+public class BuildingActivity extends Activity {
+    private City city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reservation);
+        setContentView(R.layout.activity_building);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "reservations/user/" + pref.getInt("userId", 0),
+        city = (City) getIntent().getSerializableExtra("city");
+        TextView name = (TextView) findViewById(R.id.cityName);
+        name.setText(city.getName());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "buildings/city/" + city.getCityId(),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        final List<Reservation> myReservations = new ArrayList<>();
+                        final List<Building> buildings = new ArrayList<>();
                         final ListView listView = (ListView) findViewById(R.id.listView);
-                        ArrayAdapter<Reservation> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, myReservations);
+                        ArrayAdapter<Building> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, buildings);
                         listView.setAdapter(adapter);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Reservation value = (Reservation) listView.getItemAtPosition(position);
-                                Intent intent = new Intent(getApplicationContext(), ReservationDetailActivity.class);
-                                intent.putExtra("reservation", value);
+                                Building value = (Building) listView.getItemAtPosition(position);
+                                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
+                                intent.putExtra("building", value);
                                 startActivity(intent);
                             }
                         });
@@ -55,7 +60,7 @@ public class MyReservationActivity extends Activity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
-                                myReservations.add(new Reservation(jsonObject.getInt("Id"), jsonObject.getString("Purpose"), jsonObject.getString("FromTimeString"), jsonObject.getString("ToTimeString"), jsonObject.getInt("RoomId"), jsonObject.getInt("UserId")));
+                                buildings.add(new Building(jsonObject.getInt("Id"), jsonObject.getString("Name"), jsonObject.getString("Address"), jsonObject.getInt("CityId")));
                             } catch (JSONException e) {
                                 new HelperClass().ErrorDialog(getApplicationContext(), null, null);
                                 Log.e(HelperClass.ERROR, e.toString());

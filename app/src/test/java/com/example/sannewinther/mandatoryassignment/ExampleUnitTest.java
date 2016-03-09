@@ -1,4 +1,4 @@
-package com.example.sannewinther.mandatoryassignment;
+package com.example.danielwinther.androidroomreservations;
 
 import org.junit.Test;
 

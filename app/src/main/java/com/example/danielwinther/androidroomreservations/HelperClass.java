@@ -1,4 +1,4 @@
-package com.example.sannewinther.mandatoryassignment;
+package com.example.danielwinther.androidroomreservations;
 
 import android.app.AlertDialog;
 import android.content.Context;
