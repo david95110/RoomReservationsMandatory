@@ -45,7 +45,7 @@ public class CityActivity extends Activity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 City value = (City) listView.getItemAtPosition(position);
-                                Intent intent = new Intent(getApplicationContext(), BuildingActivity.class);
+                                Intent intent = new Intent(CityActivity.this, BuildingActivity.class);
                                 intent.putExtra("city", value);
                                 startActivity(intent);
                             }
@@ -64,7 +64,7 @@ public class CityActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                Intent intent = new Intent(CityActivity.this, BuildingActivity.class);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });

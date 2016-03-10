@@ -98,7 +98,7 @@ public class ReservationActivity extends Activity {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 reservations.add(new Reservation(jsonObject.getInt("Id"), jsonObject.getString("Purpose"), jsonObject.getString("FromTimeString"), jsonObject.getString("ToTimeString"), jsonObject.getInt("RoomId"), jsonObject.getInt("UserId")));
                             } catch (JSONException e) {
-                                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                                new HelperClass().ErrorDialog(ReservationActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());
                             }
                         }
@@ -106,7 +106,7 @@ public class ReservationActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                new HelperClass().ErrorDialog(ReservationActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });

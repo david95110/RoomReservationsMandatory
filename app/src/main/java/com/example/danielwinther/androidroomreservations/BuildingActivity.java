@@ -62,7 +62,7 @@ public class BuildingActivity extends Activity {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 buildings.add(new Building(jsonObject.getInt("Id"), jsonObject.getString("Name"), jsonObject.getString("Address"), jsonObject.getInt("CityId")));
                             } catch (JSONException e) {
-                                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                                new HelperClass().ErrorDialog(BuildingActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());
                             }
                         }
@@ -70,7 +70,7 @@ public class BuildingActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                new HelperClass().ErrorDialog(BuildingActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });

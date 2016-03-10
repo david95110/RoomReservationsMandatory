@@ -51,6 +51,7 @@ public class CreateReservationActivity extends AppCompatActivity {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 spinnerAdapter.add(new Room(jsonObject.getInt("Id"), jsonObject.getString("Name"), jsonObject.getString("Description"), jsonObject.getInt("Capacity"), jsonObject.getString("Remarks"), jsonObject.getInt("BuildingId")));
                             } catch (JSONException e) {
+                                new HelperClass().ErrorDialog(CreateReservationActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());
                             }
                         }
@@ -61,6 +62,7 @@ public class CreateReservationActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                new HelperClass().ErrorDialog(CreateReservationActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });
@@ -81,8 +83,8 @@ public class CreateReservationActivity extends AppCompatActivity {
             jsonObject.put("ToTimeString", to);
             jsonObject.put("UserId", pref.getInt("userId", 0));
         } catch (JSONException e) {
+            new HelperClass().ErrorDialog(CreateReservationActivity.this, null, null);
             Log.e(HelperClass.ERROR, jsonObject.toString());
-            e.printStackTrace();
         }
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
@@ -96,6 +98,7 @@ public class CreateReservationActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                new HelperClass().ErrorDialog(CreateReservationActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         }) {

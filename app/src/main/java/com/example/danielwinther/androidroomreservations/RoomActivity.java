@@ -66,7 +66,7 @@ public class RoomActivity extends Activity {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 rooms.add(new Room(jsonObject.getInt("Id"), jsonObject.getString("Name"), jsonObject.getString("Description"), jsonObject.getInt("Capacity"), jsonObject.getString("Remarks"), jsonObject.getInt("BuildingId")));
                             } catch (JSONException e) {
-                                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                                new HelperClass().ErrorDialog(RoomActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());
                             }
                         }
@@ -74,7 +74,7 @@ public class RoomActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                new HelperClass().ErrorDialog(RoomActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });

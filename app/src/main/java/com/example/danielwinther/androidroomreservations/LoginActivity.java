@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 users.add(new User(jsonObject.getInt("Id"), jsonObject.getString("Name"), jsonObject.getString("Username"), jsonObject.getString("Password")));
                             } catch (JSONException e) {
-                                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                                new HelperClass().ErrorDialog(LoginActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());
                             }
                         }
@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(getApplicationContext(), null, null);
+                new HelperClass().ErrorDialog(LoginActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });
