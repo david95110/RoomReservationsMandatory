@@ -1,7 +1,7 @@
 package com.example.danielwinther.androidroomreservations;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReservationDetailActivity extends Activity {
+public class ReservationDetailActivity extends FragmentActivity {
     private Reservation reservation;
 
     @Override

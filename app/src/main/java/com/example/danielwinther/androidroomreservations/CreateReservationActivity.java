@@ -2,7 +2,7 @@ package com.example.danielwinther.androidroomreservations;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateReservationActivity extends AppCompatActivity {
+public class CreateReservationActivity extends FragmentActivity {
     private Spinner spinner;
 
     @Override

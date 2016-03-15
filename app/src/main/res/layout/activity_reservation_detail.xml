@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.danielwinther.androidroomreservations.ReservationDetailActivity"
     style="@style/layout">
+    <fragment
+        android:name="com.example.danielwinther.androidroomreservations.TopFragment"
+        android:id="@+id/topFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <ImageView
-        android:src="@drawable/logo"
-        style="@style/logo" />
     <TextView
         android:text="@string/reservaionDetails"
         style="@style/headline" />

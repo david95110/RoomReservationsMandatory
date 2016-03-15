@@ -1,9 +1,9 @@
 package com.example.danielwinther.androidroomreservations;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityActivity extends Activity {
+public class CityActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class CityActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Intent intent = new Intent(CityActivity.this, BuildingActivity.class);
+                new HelperClass().ErrorDialog(CityActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         });

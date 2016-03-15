@@ -1,8 +1,8 @@
 package com.example.danielwinther.androidroomreservations;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationActivity extends Activity {
+public class ReservationActivity extends FragmentActivity {
     private Room room;
     private GestureDetector gestureDetector;
 
