@@ -1,6 +1,9 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -65,15 +68,24 @@ public class ReservationActivity extends FragmentActivity {
             }
         });
         room = (Room) getIntent().getSerializableExtra("room");
-        TextView name = (TextView) findViewById(R.id.roomName);
-        TextView description = (TextView) findViewById(R.id.description);
-        TextView capacity = (TextView) findViewById(R.id.capacity);
-        TextView remarks = (TextView) findViewById(R.id.remarks);
 
-        name.setText(room.getName());
-        description.setText(room.getDescription());
-        capacity.setText(String.valueOf(room.getCapacity()));
-        remarks.setText(room.getRemarks());
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SelectedItemFragment selectedItemFragment = new SelectedItemFragment();
+        Bundle parameters = new Bundle();
+        parameters.putString("text1", room.getName());
+        parameters.putString("text2", room.getDescription());
+        parameters.putString("text3", room.getRemarks());
+        parameters.putString("text4", String.valueOf(room.getCapacity()));
+        selectedItemFragment.setArguments(parameters);
+        fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+        }
+        else {
+            fragmentTransaction.remove(selectedItemFragment);
+        }
+        fragmentTransaction.commit();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "reservations/room/" + room.getRoomId(),
                 new Response.Listener<JSONArray>() {

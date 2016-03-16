@@ -4,10 +4,11 @@
     tools:context=".CityActivity"
     style="@style/layout">
     <fragment
-        android:name="com.example.danielwinther.androidroomreservations.TopFragment"
+        class="com.example.danielwinther.androidroomreservations.TopFragment"
         android:id="@+id/topFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_top" />
 
     <TextView
         android:text="@string/city"

@@ -1,6 +1,9 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -36,11 +39,22 @@ public class RoomActivity extends FragmentActivity {
         super.onStart();
 
         building = (Building) getIntent().getSerializableExtra("building");
-        TextView name = (TextView) findViewById(R.id.name);
-        TextView address = (TextView) findViewById(R.id.address);
 
-        name.setText(building.getName());
-        address.setText(building.getAddress());
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SelectedItemFragment selectedItemFragment = new SelectedItemFragment();
+        Bundle parameters = new Bundle();
+        parameters.putString("text1", building.getName());
+        parameters.putString("text2", building.getAddress());
+        selectedItemFragment.setArguments(parameters);
+        fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+        }
+        else {
+            fragmentTransaction.remove(selectedItemFragment);
+        }
+        fragmentTransaction.commit();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "rooms/building/" + building.getBuildingId(),
                 new Response.Listener<JSONArray>() {

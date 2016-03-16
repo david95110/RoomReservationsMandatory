@@ -34,6 +34,12 @@ public class BuildingActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         city = (City) getIntent().getSerializableExtra("city");
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -45,21 +51,11 @@ public class BuildingActivity extends FragmentActivity {
         fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
-            Toast.makeText(this, "port", Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(this, "land", Toast.LENGTH_LONG).show();
             fragmentTransaction.remove(selectedItemFragment);
         }
         fragmentTransaction.commit();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //TextView name = (TextView) findViewById(R.id.cityName);
-        //.setText(city.getName());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "buildings/city/" + city.getCityId(),
                 new Response.Listener<JSONArray>() {

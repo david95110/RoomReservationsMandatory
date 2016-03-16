@@ -14,6 +14,9 @@ import com.example.danielwinther.androidroomreservations.R;
 public class SelectedItemFragment extends Fragment {
 
     private String text1 = null;
+    private String text2 = null;
+    private String text3 = null;
+    private String text4 = null;
     public SelectedItemFragment() {
     }
 
@@ -30,8 +33,17 @@ public class SelectedItemFragment extends Fragment {
         Bundle arguments = getArguments();
         if (arguments != null) {
             text1 = arguments.getString("text1");
-            TextView textView = (TextView) view.findViewById(R.id.text1);
-            textView.setText(text1);
+            text2 = arguments.getString("text2");
+            text3 = arguments.getString("text3");
+            text4 = arguments.getString("text4");
+            TextView textView1 = (TextView) view.findViewById(R.id.text1);
+            TextView textView2 = (TextView) view.findViewById(R.id.text2);
+            TextView textView3 = (TextView) view.findViewById(R.id.text3);
+            TextView textView4 = (TextView) view.findViewById(R.id.text4);
+            textView1.setText(text1);
+            textView2.setText(text2);
+            textView3.setText(text3);
+            textView4.setText(text4);
         }
     }
 }
