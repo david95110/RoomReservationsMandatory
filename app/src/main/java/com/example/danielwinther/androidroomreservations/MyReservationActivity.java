@@ -55,7 +55,7 @@ public class MyReservationActivity extends FragmentActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
-                                myReservations.add(new Reservation(jsonObject.getInt("Id"), jsonObject.getString("Purpose"), jsonObject.getString("FromTimeString"), jsonObject.getString("ToTimeString"), jsonObject.getInt("RoomId"), jsonObject.getInt("UserId")));
+                                myReservations.add(new Reservation(jsonObject.getInt("Id"), jsonObject.getString("DeviceId"), jsonObject.getString("Purpose"), jsonObject.getString("FromTimeString"), jsonObject.getString("ToTimeString"), jsonObject.getInt("RoomId"), jsonObject.getInt("UserId")));
                             } catch (JSONException e) {
                                 new HelperClass().ErrorDialog(MyReservationActivity.this, null, null);
                                 Log.e(HelperClass.ERROR, e.toString());

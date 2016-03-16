@@ -1,6 +1,9 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,15 +33,33 @@ public class BuildingActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building);
+
+        city = (City) getIntent().getSerializableExtra("city");
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SelectedItemFragment selectedItemFragment = new SelectedItemFragment();
+        Bundle parameters = new Bundle();
+        parameters.putString("text1", city.getName());
+        selectedItemFragment.setArguments(parameters);
+        fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
+            Toast.makeText(this, "port", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "land", Toast.LENGTH_LONG).show();
+            fragmentTransaction.remove(selectedItemFragment);
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        city = (City) getIntent().getSerializableExtra("city");
-        TextView name = (TextView) findViewById(R.id.cityName);
-        name.setText(city.getName());
+        //TextView name = (TextView) findViewById(R.id.cityName);
+        //.setText(city.getName());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "buildings/city/" + city.getCityId(),
                 new Response.Listener<JSONArray>() {

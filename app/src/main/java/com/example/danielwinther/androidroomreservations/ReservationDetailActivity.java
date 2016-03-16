@@ -1,5 +1,6 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -40,7 +41,11 @@ public class ReservationDetailActivity extends FragmentActivity {
         fromTime.setText(reservation.getFromTimeString());
         toTime.setText(reservation.getToTimeString());
     }
-
+    public void updateReservation(View view) {
+        Intent intent = new Intent(this, UpdateReservationActivity.class);
+        intent.putExtra("reservation", reservation);
+        startActivity(intent);
+    }
     public void deleteReservation(View view) {
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.DELETE, HelperClass.URL + "reservations/" + reservation.getReservationId(), null,
@@ -70,4 +75,5 @@ public class ReservationDetailActivity extends FragmentActivity {
     public void back(View view) {
         finish();
     }
+
 }

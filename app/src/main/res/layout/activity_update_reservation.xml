@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.danielwinther.androidroomreservations.UpdateReservationActivity"
+    style="@style/layout">
+    <fragment
+        android:name="com.example.danielwinther.androidroomreservations.TopFragment"
+        android:id="@+id/topFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="@string/updateReservation"
+        style="@style/headline" />
+
+    <EditText
+        android:id="@+id/updatePurpose"
+        android:hint="@string/purpose"
+        style="@style/editText" />
+    <EditText
+        android:id="@+id/updateFrom"
+        android:hint="@string/from"
+        style="@style/editText" />
+    <EditText
+        android:id="@+id/updateTo"
+        android:hint="@string/to"
+        style="@style/editText" />
+    <Spinner
+        android:id="@+id/updateRoomId"
+        android:hint="@string/roomId"
+        style="@style/editText" />
+
+    <Button
+        android:id="@+id/update"
+        android:onClick="update"
+        android:text="@string/update"
+        style="@style/button"/>
+    <Button
+        android:onClick="back"
+        android:text="@string/backButton"
+        style="@style/button" />
+</LinearLayout>

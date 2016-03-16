@@ -3,24 +3,31 @@
     package="com.example.danielwinther.androidroomreservations">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.danielwinther.androidroomreservations.LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.danielwinther.androidroomreservations.BuildingActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.RoomActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.CityActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.ReservationActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.CreateReservationActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.ReservationDetailActivity" />
-        <activity android:name="com.example.danielwinther.androidroomreservations.MyReservationActivity" />
+        <activity android:name=".BuildingActivity" />
+        <activity android:name=".RoomActivity" />
+        <activity android:name=".CityActivity" />
+        <activity android:name=".ReservationActivity" />
+        <activity android:name=".CreateReservationActivity" />
+        <activity android:name=".ReservationDetailActivity" />
+        <activity android:name=".MyReservationActivity" />
+        <activity
+            android:name=".UpdateReservationActivity"
+            android:label="@string/title_activity_update_reservation"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>

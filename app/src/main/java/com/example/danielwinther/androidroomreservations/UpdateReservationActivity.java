@@ -1,9 +1,9 @@
 package com.example.danielwinther.androidroomreservations;
 
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,24 +25,31 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateReservationActivity extends FragmentActivity {
+public class UpdateReservationActivity extends AppCompatActivity {
     private Spinner spinner;
-
+    private Reservation reservation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_reservation);
+        setContentView(R.layout.activity_update_reservation);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
+        reservation = (Reservation) getIntent().getSerializableExtra("reservation");
+
+        EditText purpose = (EditText) findViewById(R.id.updatePurpose);
+        EditText from = (EditText) findViewById(R.id.updateFrom);
+        EditText to = (EditText) findViewById(R.id.updateTo);
+        purpose.setText(reservation.getPurpose());
+        from.setText(reservation.getFromTimeString());
+        to.setText(reservation.getToTimeString());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(HelperClass.URL + "rooms/",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        spinner = (Spinner) findViewById(R.id.createRoomId);
+                        spinner = (Spinner) findViewById(R.id.updateRoomId);
                         final ArrayAdapter<Room> spinnerAdapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
                         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(spinnerAdapter);
@@ -70,10 +77,10 @@ public class CreateReservationActivity extends FragmentActivity {
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
 
-    public void create(View view) {
-        String purpose = ((EditText) findViewById(R.id.createPurpose)).getText().toString();
-        String from = ((EditText) findViewById(R.id.createFrom)).getText().toString();
-        String to = ((EditText) findViewById(R.id.createTo)).getText().toString();
+    public void update(View view) {
+        String purpose = ((EditText) findViewById(R.id.updatePurpose)).getText().toString();
+        String from = ((EditText) findViewById(R.id.updateFrom)).getText().toString();
+        String to = ((EditText) findViewById(R.id.updateTo)).getText().toString();
         SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
         JSONObject jsonObject = new JSONObject();
         try {
@@ -87,7 +94,7 @@ public class CreateReservationActivity extends FragmentActivity {
         } catch (JSONException e) {}
         Log.d("d", jsonObject.toString());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.POST, HelperClass.URL + "reservations", jsonObject,
+                Request.Method.PUT, HelperClass.URL + "reservations/" + reservation.getReservationId(), jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -110,7 +117,6 @@ public class CreateReservationActivity extends FragmentActivity {
         };
         Volley.newRequestQueue(this).add(jsonObjReq);
     }
-
     public void back(View view) {
         finish();
     }

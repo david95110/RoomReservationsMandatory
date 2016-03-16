@@ -23,6 +23,10 @@
         android:id="@+id/toTime"
         style="@style/underHeadline" />
     <Button
+        android:onClick="updateReservation"
+        android:text="@string/updateReservation"
+        style="@style/button" />
+    <Button
         android:onClick="deleteReservation"
         android:text="@string/deleteReservation"
         style="@style/deleteButton" />
