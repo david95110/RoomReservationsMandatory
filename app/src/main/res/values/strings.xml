@@ -19,8 +19,8 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="roomId">Room ID</string>
-    <string name="currentReservation">Current reservations for this room</string>
-    <string name="reservaionDetails">Reservation details</string>
+    <string name="currentReservation">Current reservations</string>
+    <string name="reservationDetails">Reservation details</string>
     <string name="myReservations">My reservations</string>
     <string name="deleteReservation">Delete reservation</string>
 

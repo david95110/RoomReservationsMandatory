@@ -66,18 +66,16 @@ public class LoginActivity extends FragmentActivity {
         String p = password.getText().toString();
         if (u != null && !u.isEmpty() && !u.equals("null") && p != null && !p.isEmpty() && !p.equals("null")) {
             for (User user : users) {
-                if (user.getUsername().contains(u) && user.getPassword().contains(p)) {
+                if (user.getUsername().equals(u) && user.getPassword().equals(p)) {
                     Intent intent = new Intent(this, CityActivity.class);
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putInt("userId", user.getUserId());
                     editor.commit();
-
                     startActivity(intent);
                     break;
                 } else {
                     new HelperClass().ErrorDialog(this, null, "Wrong username/password!");
-                    break;
                 }
             }
         } else {

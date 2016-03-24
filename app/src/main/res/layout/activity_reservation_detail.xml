@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_top" />
 
     <TextView
-        android:text="@string/reservaionDetails"
+        android:text="@string/reservationDetails"
         style="@style/headline" />
 
     <TextView
@@ -25,10 +25,12 @@
         style="@style/underHeadline" />
 
     <Button
+        android:id="@+id/updateReservation"
         android:onClick="updateReservation"
         android:text="@string/updateReservation"
         style="@style/button" />
     <Button
+        android:id="@+id/deleteReservation"
         android:onClick="deleteReservation"
         android:text="@string/deleteReservation"
         style="@style/deleteButton" />

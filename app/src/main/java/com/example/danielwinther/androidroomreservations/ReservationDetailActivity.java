@@ -1,10 +1,14 @@
 package com.example.danielwinther.androidroomreservations;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -40,6 +44,14 @@ public class ReservationDetailActivity extends FragmentActivity {
         purpose.setText(reservation.getPurpose());
         fromTime.setText(reservation.getFromTimeString());
         toTime.setText(reservation.getToTimeString());
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+        if (pref.getInt("userId", 0) != reservation.getUserId()) {
+            Button updateButton = (Button) findViewById(R.id.updateReservation);
+            updateButton.setVisibility(View.GONE);
+            Button deleteButton = (Button) findViewById(R.id.deleteReservation);
+            deleteButton.setVisibility(View.GONE);
+        }
     }
     public void updateReservation(View view) {
         Intent intent = new Intent(this, UpdateReservationActivity.class);
