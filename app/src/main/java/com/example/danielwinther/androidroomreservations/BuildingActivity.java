@@ -70,6 +70,7 @@ public class BuildingActivity extends FragmentActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Building value = (Building) listView.getItemAtPosition(position);
                                 Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
+                                intent.putExtra("city", city);
                                 intent.putExtra("building", value);
                                 startActivity(intent);
                             }
