@@ -11,6 +11,7 @@
         tools:layout="@layout/fragment_top" />
 
     <TextView
+        android:id="@+id/kilometers"
         android:text="@string/room"
         style="@style/headline" />
 
@@ -19,7 +20,12 @@
         style="@style/list" />
 
     <Button
+        android:onClick="googleMaps"
+        android:text="@string/googleMaps"
+        style="@style/button" />
+    <Button
         android:onClick="back"
         android:text="@string/backButton"
         style="@style/button" />
+
 </LinearLayout>

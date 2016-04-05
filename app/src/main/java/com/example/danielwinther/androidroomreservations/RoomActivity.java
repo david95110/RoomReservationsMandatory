@@ -9,7 +9,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -39,13 +41,44 @@ import java.util.List;
 
 public class RoomActivity extends FragmentActivity {
     private Building building;
-
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    private double lon;
+    private double lat;
+    private double latitude;
+    private double longitude;
+    private double distance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            locationManager.removeUpdates(locationListener);
+        }
+        catch (SecurityException ex) {
 
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        }
+        catch (SecurityException ex) {
+
+        }
+    }
+
+    private void showLocation(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -58,33 +91,58 @@ public class RoomActivity extends FragmentActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        try {
+            locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            showLocation(lastKnownLocation);
+            locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    showLocation(location);
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                }
+
+                public void onProviderEnabled(String provider) {
+                }
+
+                public void onProviderDisabled(String provider) {
+                }
+            };
+        }
+        catch (SecurityException ex) {
+
+        }
+
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, "http://maps.google.com/maps/api/geocode/json?address=" + query + "&ka&sensor=false", null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            double lon = ((JSONArray) response.get("results")).getJSONObject(0)
+                            lon = ((JSONArray) response.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lng");
 
-                            double lat = ((JSONArray) response.get("results")).getJSONObject(0)
+                            lat = ((JSONArray) response.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lat");
+
                             Location locationA = new Location("A");
                             locationA.setLongitude(lon);
                             locationA.setLatitude(lat);
 
-                            /*try {
-                                Criteria criteria = new Criteria();
-                                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                                String provider = locationManager.getBestProvider(criteria, false);
-                                Location location = locationManager.getLastKnownLocation(provider);
-                                int la = (int) (location.getLatitude() * 1E6);
-                                int lo = (int) (location.getLongitude() * 1E6);
+                            try {
+                                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                                Location locationB = new Location("B");
+                                locationB.setLongitude(longitude);
+                                locationB.setLatitude(latitude);
+
+                                distance = locationA.distanceTo(locationB);
                             }
                             catch (SecurityException ex) {
 
-                            }*/
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -107,6 +165,7 @@ public class RoomActivity extends FragmentActivity {
         Bundle parameters = new Bundle();
         parameters.putString("text1", building.getName());
         parameters.putString("text2", building.getAddress());
+        parameters.putString("text3", String.valueOf(String.format("%.3f", distance / 1000)) + " km");
         selectedItemFragment.setArguments(parameters);
         fragmentTransaction.replace(android.R.id.content, selectedItemFragment);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -156,6 +215,13 @@ public class RoomActivity extends FragmentActivity {
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
 
+    public void googleMaps(View view) {
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lon);
+        Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        intent.setPackage("com.google.android.apps.maps");
+
+        startActivity(intent);
+    }
     public void back(View view) {
         finish();
     }
