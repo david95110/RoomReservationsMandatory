@@ -64,13 +64,13 @@ public class ReservationDetailActivity extends FragmentActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        new HelperClass().ErrorDialog(ReservationDetailActivity.this, null, null);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                new HelperClass().ErrorDialog(ReservationDetailActivity.this, null, null);
+                //new HelperClass().ErrorDialog(ReservationDetailActivity.this, null, null);
                 Log.e(HelperClass.ERROR, error.toString());
             }
         }) {

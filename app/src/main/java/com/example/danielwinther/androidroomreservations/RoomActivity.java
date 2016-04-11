@@ -115,7 +115,7 @@ public class RoomActivity extends FragmentActivity {
 
         }
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, "http://maps.google.com/maps/api/geocode/json?address=" + query + "&ka&sensor=false", null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -157,7 +157,7 @@ public class RoomActivity extends FragmentActivity {
 
                     }
                 });
-        Volley.newRequestQueue(this).add(jsObjRequest);
+        Volley.newRequestQueue(this).add(jsonObjectRequest);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

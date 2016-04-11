@@ -1,5 +1,6 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -69,7 +70,20 @@ public class CreateReservationActivity extends FragmentActivity {
         });
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
+    public void showFromDatePickerDialog(View v) {
+        DialogFragment timeFragment = new CreateTimePickerFromFragment();
+        timeFragment.show(getFragmentManager(), "timePickerFrom");
 
+        DialogFragment dateFragment = new CreateDatePickerFromFragment();
+        dateFragment.show(getFragmentManager(), "datePickerFrom");
+    }
+    public void showToDatePickerDialog(View v) {
+        DialogFragment timeFragment = new CreateTimePickerToFragment();
+        timeFragment.show(getFragmentManager(), "timePickerTo");
+
+        DialogFragment dateFragment = new CreateDatePickerToFragment();
+        dateFragment.show(getFragmentManager(), "datePickerTo");
+    }
     public void create(View view) {
         String purpose = ((EditText) findViewById(R.id.createPurpose)).getText().toString();
         String from = ((EditText) findViewById(R.id.createFrom)).getText().toString();

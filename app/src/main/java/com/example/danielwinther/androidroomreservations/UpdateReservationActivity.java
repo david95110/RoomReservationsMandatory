@@ -1,5 +1,6 @@
 package com.example.danielwinther.androidroomreservations;
 
+import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -76,7 +77,20 @@ public class UpdateReservationActivity extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
+    public void showFromDatePickerDialog(View v) {
+        DialogFragment timeFragment = new UpdateTimePickerFromFragment();
+        timeFragment.show(getFragmentManager(), "timePickerFrom");
 
+        DialogFragment dateFragment = new UpdateDatePickerFromFragment();
+        dateFragment.show(getFragmentManager(), "datePickerFrom");
+    }
+    public void showToDatePickerDialog(View v) {
+        DialogFragment timeFragment = new UpdateTimePickerToFragment();
+        timeFragment.show(getFragmentManager(), "timePickerTo");
+
+        DialogFragment dateFragment = new UpdateDatePickerToFragment();
+        dateFragment.show(getFragmentManager(), "datePickerTo");
+    }
     public void update(View view) {
         String purpose = ((EditText) findViewById(R.id.updatePurpose)).getText().toString();
         String from = ((EditText) findViewById(R.id.updateFrom)).getText().toString();
